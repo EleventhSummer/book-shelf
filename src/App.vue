@@ -1,7 +1,15 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <HelloWorld />
+  <header>
+    <nav>
+      <RouterLink to="/">搜索</RouterLink>
+      <RouterLink to="/want">想读</RouterLink>
+    </nav>
+  </header>
+  <main>
+    <RouterView />
+  </main>
 </template>
