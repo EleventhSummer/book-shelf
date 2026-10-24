@@ -1,0 +1,7 @@
+export type Book = {
+    id: string
+    title: string
+    authors: string[]
+    year: number | null
+    coverId: number | null
+}

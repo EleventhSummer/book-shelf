@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { useSearch } from '../composables/useSearch'
 
 const keyword = ref('')
-const { message, submit } = useSearch()
+const { message, books, submit } = useSearch()
 
 function onSubmit() {
     submit(keyword.value)
@@ -16,4 +16,11 @@ function onSubmit() {
         <button type="submit">搜索</button>
     </form>
     <p v-if="message">{{ message }}</p>
+    <ul>
+        <li v-for="book in books" :key="book.id">
+            <span>{{ book.title }}</span>
+            <span v-for="(author, index) in book.authors" :key="index">{{ author }}</span>
+            <span v-if="book.year !== null">{{ book.year }}</span>
+        </li>
+    </ul>
 </template>
