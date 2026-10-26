@@ -1,5 +1,6 @@
 import type { Book } from '../types/book'
 
+// 将搜索结果里的一条转成 Book
 function toBook(doc: Record<string, unknown>): Book | null {
     if (typeof doc.key !== 'string') return null
     const id = doc.key.split('/').pop()
@@ -18,6 +19,7 @@ function toBook(doc: Record<string, unknown>): Book | null {
     }
 }
 
+// 用关键词请求 openlibrary
 export async function searchBooks(keyword: string): Promise<Book[]> {
     let response: Response
     try {
