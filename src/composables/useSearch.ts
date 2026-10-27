@@ -2,23 +2,26 @@ import { ref } from 'vue'
 import { searchBooks } from '../api/searchBooks'
 import type { Book } from '../types/book'
 
-export function useSearch() {
-    const message = ref('')
-    const books = ref<Book[]>([])
-    let requestId = 0
-     
-    async function submit(raw: string) {
-        const keyword = raw.trim()
+// 搜索关键词、提示、结果、请求编号
+const keyword = ref('')
+const message = ref('')
+const books = ref<Book[]>([])
+let requestId = 0
 
-        if (keyword.length === 0) {
+export function useSearch() {
+     
+    async function submit() {
+        const text = keyword.value.trim()
+
+        if (text.length === 0) {
             message.value = '关键词为空，请输入 3-20 字书名或者作者'
             return
         }
-        if (keyword.length < 3) {
+        if (text.length < 3) {
             message.value = '至少 3 个字'
             return
         }
-        if (keyword.length > 20) {
+        if (text.length > 20) {
             message.value = '不超过 20 个字'
             return
         }
@@ -27,7 +30,7 @@ export function useSearch() {
         message.value = '正在加载'
 
         try {
-            const list = await searchBooks(keyword)
+            const list = await searchBooks(text)
             if (currentId !== requestId) return
             books.value = list 
             message.value = list.length === 0 ? '没有结果' : ''
@@ -37,5 +40,5 @@ export function useSearch() {
         }
     }
 
-    return { message, books, submit }
+    return { keyword, message, books, submit }
 }

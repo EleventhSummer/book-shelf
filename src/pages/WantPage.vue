@@ -20,3 +20,17 @@ const { books, remove } = useWant()
         </li>
     </ul>
 </template>
+
+<style scoped>
+li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+img {
+    height: 72px;
+    width: auto;
+    flex-shrink: 0;
+}
+</style>

@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useSearch } from '../composables/useSearch'
 import { useRouter } from 'vue-router'
 import { useCurrentBook } from '../composables/useCurrentBook'
 import type { Book } from '../types/book'
 
-const keyword = ref('')
-const { message, books, submit } = useSearch()
+const { keyword, message, books, submit } = useSearch()
 const router = useRouter()
 const { open } = useCurrentBook()
 
@@ -16,7 +14,7 @@ function openBook(book: Book) {
 }
 
 function onSubmit() {
-    submit(keyword.value)
+    submit()
 }
 </script>
 

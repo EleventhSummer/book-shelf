@@ -12,7 +12,7 @@ Composable 是以 `use` 开头的函数，负责会变的数据和修改它们�
 
 | 数据 | 放在 |
 | --- | --- |
-| 关键词校验、搜索结果、四种搜索状态、本次搜索编号、发起搜索 | `useSearch()` |
+| 关键词校验、搜索结果、四种搜索状态、本次搜索编号、发起搜索 | `useSearch()`，数据放在模块顶层 |
 | 刚点开的那一条 | `useCurrentBook()`，数据放在模块顶层 |
 | 想读清单 | `useWant()` |
 
@@ -38,9 +38,9 @@ PRD 有这三个地址。刷新、复制链接、前进后退都靠地址找到�
 
 ## 详情
 
-刚点开的那本书放在 `useCurrentBook()` 的内存里，不写入 localStorage。
+刚点开的那本书放在`useCurrentBook()`的模块顶层，并用`sessionStorage`记住这一本。刷新后从`sessionStorage`读回。不写入`localStorage`。本标签页没点开过的地址对不上，显示找不到这本书。
 
-点击搜索结果时写入 `useCurrentBook()`，再进入 `/books/:id`。详情页用路由里的 id 和内存里的 id 比较，对不上就显示找不到这本书。刷新后这份内存清空。
+点击搜索结果时写入 `useCurrentBook()`，再进入 `/books/:id`。详情页用路由里的 id 和内存里的 id 比较，对不上就显示找不到这本书。
 
 ## 存储
 
